@@ -1,5 +1,6 @@
 package com.colson.test;
 
+import com.colson.bean.Color;
 import com.colson.bean.Person;
 import com.colson.config.MainConfig;
 import com.colson.config.MainConfig2;
@@ -12,6 +13,19 @@ import java.util.Map;
 public class IOCTest {
     AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(MainConfig2.class);
 
+    @Test
+    public void testImport() {
+        printBeans(applicationContext);
+        Color factoryBean = (Color) applicationContext.getBean("colorFactoryBean");
+        System.out.println(factoryBean.getClass());
+    }
+
+    private void printBeans(AnnotationConfigApplicationContext applicationContext) {
+        String[] definitionNames = applicationContext.getBeanDefinitionNames();
+        for (String name : definitionNames) {
+            System.out.println(name);
+        }
+    }
 
     @Test
     public void test03() {
